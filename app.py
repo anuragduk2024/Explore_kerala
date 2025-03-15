@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
-GEMINI_API_KEY = "AIzaSyBwQ0Wr32pbo9HdsiQcbgHzwpCLKExurVU"
+GEMINI_API_KEY = "API"
 
 
 @app.route("/")
