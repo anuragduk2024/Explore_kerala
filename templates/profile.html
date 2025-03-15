@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    <!-- Background -->
+    <div class="background"></div>
+
+    <!-- Welcome Text (Top Right) -->
+    <div id="welcomeText" class="welcome-text"></div>
+
+    <div class="profile-container">
+        <!-- Profile Creation Form -->
+        <form id="profileForm" onsubmit="saveProfile(event)">
+            <h2>Create Your Profile</h2>
+            <label for="name">Enter Your Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email (Optional):</label>
+            <input type="email" id="email">
+
+            <label for="phone">Phone (Optional):</label>
+            <input type="text" id="phone">
+
+            <button type="submit">Save</button>
+            <button type="button" onclick="loginWithGoogle()">Login with Google</button>
+        </form>
+
+        <!-- Profile Details Box (Hidden Initially) -->
+        <div id="profileDetails" class="profile-box" style="display: none;">
+            <h2>Profile Details</h2>
+            <p><strong>Name:</strong> <span id="displayName"></span></p>
+            <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="displayPhone"></span></p>
+            <button onclick="editProfile()">Edit Profile</button>
+        </div>
+    </div>
+
+    <script>
+        function saveProfile(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+
+            // Store in localStorage
+            localStorage.setItem("profileName", name);
+            localStorage.setItem("profileEmail", email);
+            localStorage.setItem("profilePhone", phone);
+
+            window.location.href = "/explore"; // Redirect to Explore Page
+        }
+
+        function loadProfile() {
+            const savedName = localStorage.getItem("profileName");
+            const savedEmail = localStorage.getItem("profileEmail");
+            const savedPhone = localStorage.getItem("profilePhone");
+
+            if (savedName) {
+                document.getElementById("welcomeText").innerText = `Hello, ${savedName}!`;
+                document.getElementById("displayName").innerText = savedName;
+                document.getElementById("displayEmail").innerText = savedEmail || "Not Provided";
+                document.getElementById("displayPhone").innerText = savedPhone || "Not Provided";
+
+                document.getElementById("profileForm").style.display = "none";
+                document.getElementById("profileDetails").style.display = "block";
+            }
+        }
+
+        function editProfile() {
+            document.getElementById("profileForm").style.display = "block";
+            document.getElementById("profileDetails").style.display = "none";
+        }
+
+        function loginWithGoogle() {
+            alert("Google Login Coming Soon!");
+        }
+
+        document.addEventListener("DOMContentLoaded", loadProfile);
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('/static/background.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .profile-container {
+            margin-top: 100px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 40%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .welcome-text {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        input, button {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 10px;
+        }
+
+        .profile-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        button {
+            cursor: pointer;
+            background: orange;
+            color: black;
+            font-weight: bold;
+            border: none;
+        }
+    </style>
+
+</body>
+</html>

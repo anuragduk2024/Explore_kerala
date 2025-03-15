@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerala Tourism Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h1 class="page-title">Tourism Analytics</h1>
+
+    <section class="analytics">
+        <h2>Visitor Trends</h2>
+        <canvas id="visitorChart"></canvas>
+    </section>
+
+    <section class="analytics">
+        <h2>Top 5 Most Visited Places</h2>
+        <canvas id="topDestinationsChart"></canvas>
+    </section>
+
+    <script>
+        // Visitor Trends Data
+        const visitorCtx = document.getElementById('visitorChart').getContext('2d');
+        new Chart(visitorCtx, {
+            type: 'line',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'Visitors (in millions)',
+                    data: [1.2, 0.9, 1.0, 1.3, 1.5, 1.7],
+                    borderColor: 'blue',
+                    backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                    fill: true
+                }]
+            }
+        });
+
+        // Top Destinations Data
+        const topDestinationsCtx = document.getElementById('topDestinationsChart').getContext('2d');
+        new Chart(topDestinationsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Munnar', 'Alleppey', 'Wayanad', 'Kovalam', 'Kumarakom'],
+                datasets: [{
+                    label: 'Tourists (in thousands)',
+                    data: [400, 350, 320, 290, 270],
+                    backgroundColor: ['red', 'green', 'blue', 'orange', 'purple']
+                }]
+            }
+        });
+    </script>
+
+</body>
+</html>
+

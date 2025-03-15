@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sent Messages - Kerala Tourism</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    <h1>📤 Sent Messages</h1>
+    <p>Your sent messages will appear here.</p>
+
+    <!-- Compose Mail Button -->
+    <button class="compose-btn" onclick="toggleCompose()">Compose Mail</button>
+
+    <!-- Compose Mail Box -->
+    <div id="composeMailBox" class="compose-mail">
+        <h2>Compose Mail</h2>
+        <form>
+            <label>To:</label>
+            <input type="email" placeholder="Recipient email" required>
+
+            <label>Subject:</label>
+            <input type="text" placeholder="Enter subject" required>
+
+            <label>Message:</label>
+            <textarea placeholder="Type your message..." required></textarea>
+
+            <button type="submit">Send</button>
+            <button type="button" onclick="toggleCompose()">Close</button>
+        </form>
+    </div>
+
+</body>
+</html>

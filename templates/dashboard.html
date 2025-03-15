@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerala Tourism Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <h1 class="dashboard-title">Kerala Tourism Dashboard</h1>
+
+    <!-- Popular Destinations -->
+    <section class="card">
+        <h2>Popular Destinations</h2>
+        <ul>
+            <li>Munnar</li>
+            <li>Alleppey</li>
+            <li>Wayanad</li>
+            <li>Kovalam</li>
+            <li>Kumarakom</li>
+        </ul>
+    </section>
+
+    <!-- Tourist Statistics -->
+    <section class="card">
+        <h2>Tourist Statistics</h2>
+        <p>Number of visitors last year: 1.5 Million</p>
+        <p>Best Season to Visit: October - March</p>
+    </section>
+
+    <!-- Upcoming Festivals -->
+    <section class="card">
+        <h2>Upcoming Festivals</h2>
+        <ul>
+            <li>Onam - August</li>
+            <li>Thrissur Pooram - May</li>
+            <li>Boat Races - July to September</li>
+        </ul>
+    </section>
+
+    <!-- Weather Update -->
+    <section class="card">
+        <h2>Weather Updates</h2>
+        <p id="weather">Fetching weather data...</p>
+    </section>
+
+    <!-- Reviews -->
+    <section class="card">
+        <h2>User Reviews</h2>
+        <p>🌟🌟🌟🌟🌟 "Amazing experience in Munnar!" - Rajesh</p>
+        <p>🌟🌟🌟🌟 "Loved the backwaters in Alleppey!" - Priya</p>
+    </section>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

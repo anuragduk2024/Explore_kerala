@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Kerala</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Background Image -->
+    <div class="background-image"></div>
+
+    <!-- Title -->
+    <h1 class="page-title">Explore Kerala</h1>
+
+    <!-- Top Right Profile Greeting -->
+    <div class="profile-greeting" id="greeting"></div>
+
+    <!-- Left Corner Icons -->
+    <div class="icon-menu">
+        <div class="icon-wrapper" onclick="toggleDropdown('homeDropdown')">
+            <i class="fas fa-home"></i>
+            <div class="dropdown" id="homeDropdown">
+                <a href="/dashboard">Dashboard</a>
+                <a href="/overview">Overview</a>
+                <a href="/analytics">Analytics</a>
+            </div>
+        </div>
+
+        <div class="icon-wrapper" onclick="toggleDropdown('messageDropdown')">
+            <i class="fas fa-envelope"></i>
+            <div class="dropdown" id="messageDropdown">
+                <a href="/inbox">Inbox</a>
+                <a href="/sent">Sent</a>
+                <a href="/drafts">Drafts</a>
+            </div>
+        </div>
+
+        <div class="icon-wrapper" onclick="toggleDropdown('profileDropdown')">
+            <i class="fas fa-user"></i>
+            <div class="dropdown" id="profileDropdown">
+                <a href="/profile">Profile</a>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+
+        <div class="icon-wrapper" onclick="toggleDropdown('settingsDropdown')">
+            <i class="fas fa-cog"></i>
+            <div class="dropdown" id="settingsDropdown">
+                <a href="/privacy">Privacy</a>
+                <a href="/help">Help & Support</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map of Kerala -->
+    <div class="map-container">
+    <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=74.5,8.0,78.5,13.0&layer=mapnik"
+        width="100%"
+        height="100%"
+        style="border:0;">
+    </iframe>
+    </div>
+
+    <!-- Route Input Box -->
+    <div class="route-box">
+        <h2>Plan Your Trip</h2>
+        <form id="routeForm" action="/plan_trip" method="POST">
+            <label for="destination">Destination State:</label>
+            <input type="text" id="destination" name="destination" required>
+
+            <label for="days">Number of Days:</label>
+            <input type="number" id="days" name="days" required>
+
+            <label for="budget">Budget (INR):</label>
+            <input type="number" id="budget" name="budget" required>
+
+            <label for="travelTime">Travel Time (hrs):</label>
+            <input type="number" id="travelTime" name="travelTime" required>
+
+            <label for="restTime">Rest Time (hrs):</label>
+            <input type="number" id="restTime" name="restTime" required>
+
+            <button type="submit">Generate Route</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleDropdown(id) {
+            document.querySelectorAll(".dropdown").forEach(drop => {
+                if (drop.id !== id) drop.style.display = "none";
+            });
+
+            let dropdown = document.getElementById(id);
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+
+            dropdown.querySelectorAll("a").forEach(item => {
+                item.addEventListener("click", () => {
+                    dropdown.style.display = "none";
+                });
+            });
+        }
+
+        document.addEventListener("click", function (event) {
+            let isClickInside = event.target.closest(".icon-wrapper");
+            if (!isClickInside) {
+                document.querySelectorAll(".dropdown").forEach(drop => {
+                    drop.style.display = "none";
+                });
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const username = localStorage.getItem("profileName");
+            if (username) {
+                document.getElementById("greeting").innerText = `Hi, ${username}`;
+            }
+        });
+    </script>
+
+    <style>
+        .map-container {
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .route-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 8px;
+            color: white;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .route-box input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .route-box label, .route-box button {
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
+</body>
+</html>

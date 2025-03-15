@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Overview</title>
+</head>
+<body>
+    <h1>Your Travel Plan</h1>
+    <h2>Trip Overview</h2>
+    {% if trip_details %}
+        <p><strong>Destination:</strong> {{ trip_details["destination"] }}</p>
+        <p><strong>Number of Days:</strong> {{ trip_details["days"] }}</p>
+        <p><strong>Budget:</strong> ₹{{ trip_details["budget"] }}</p>
+        <p><strong>Travel Time:</strong> {{ trip_details["travel_time"] }} hrs</p>
+        <p><strong>Rest Time:</strong> {{ trip_details["rest_time"] }} hrs</p>
+    {% else %}
+        <p>No trip details available.</p>
+    {% endif %}
+</body>
+</html>
